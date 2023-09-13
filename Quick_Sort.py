@@ -1,7 +1,6 @@
 def quicksort(array):
     if len(array) <= 1:
         return array
-    
     pivot = array[0]
     smaller = []
     larger = []

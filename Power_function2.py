@@ -9,7 +9,6 @@ def power(x, y):
 		return temp * temp
 	else:
 		return x * temp * temp
-
 x = 3
 y = 5
 print("Power is : ", power(x,y))
