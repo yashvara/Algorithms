@@ -1,31 +1,29 @@
-# According to this algorithm, we can represent any number of k digits as m = a*10k/2 + b,
-# where k is the length of the number.
-# a and b are decided based on the length of the number.
+def karatsuba(x, y):
+    # Base case: If the numbers are small, use standard multiplication
+    if x < 10 or y < 10:
+        return x * y
 
-def karatsuba(m,n):
-    if(m<10 or n<10):
-        return m*n
-    else:
-        mstring = str(m)
-        nstring = str(n)
+    # Calculate the number of digits in the numbers
+    n = max(len(str(x)), len(str(y)))
+    n2 = n // 2
 
-        k = max(len(mstring), len(nstring))
-        mid=int(k/2)
-            #finding a and c i.e. the higher bits for each number
-        a = int(mstring[:-mid])
-        c = int(nstring[:-mid])
+    # Split the input numbers into two halves
+    a = x // 10**n2
+    b = x % 10**n2
+    c = y // 10**n2
+    d = y % 10**n2
 
-            #finding b and d i.e. the lower bits for each number
-        b = int(mstring[-mid:])
-        d = int(nstring[-mid:])
+    # Recursively compute the three products required by Karatsuba
+    ac = karatsuba(a, c)
+    bd = karatsuba(b, d)
+    ad_bc = karatsuba(a + b, c + d) - ac - bd
 
-            #finding ac, bd and ad_plus_bc
-        ac = karatsuba(a, c)
-        bd = karatsuba(b, d)
-        ad_plus_bc = karatsuba(a + b, c + d) - ac - bd
+    # Combine the results to get the final product
+    result = ac * 10**(2 * n2) + (ad_bc * 10**n2) + bd
+    return result
 
-        return ac*10**(2 * mid) + ad_plus_bc*10**(mid) + bd
-
-print("Answer is:")
-print(karatsuba(3425,2486))
+x = 12345678901234567890
+y = 98765432109876543210
+result = karatsuba(x, y)
+print(result)
 
