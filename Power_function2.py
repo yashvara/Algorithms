@@ -13,4 +13,3 @@ def power(x, y):
 x = 3
 y = 5
 print("Power is : ", power(x,y))
-

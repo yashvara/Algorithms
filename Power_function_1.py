@@ -7,4 +7,3 @@ if exponent != 0:
 else:
   result == 1
 print("Exponential value is : ", result) # 125
-# Time complexity = O(n)
